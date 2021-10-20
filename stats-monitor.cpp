@@ -22,8 +22,10 @@ int main() {
 
     while (1) {
         sleep(1);
+        memSensor->getReadings(readings);
         cpuSensor->getReadings(readings);
-        std::cout << readings.cpuSensor.totalUsage.property << ": " << readings.cpuSensor.totalUsage.value << std::endl;    
+        std::cout << readings.cpuSensor.totalUsage.property << ": " << readings.cpuSensor.totalUsage.value << std::endl;
+        std::cout << readings.memorySensor.memAvailable.property << ": " << readings.memorySensor.memAvailable.value << std::endl;
     }
 
     return 0;

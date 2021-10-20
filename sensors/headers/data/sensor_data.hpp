@@ -5,7 +5,7 @@
 
 typedef struct sensor_data {
     std::string property;
-    int value;
+    float value;
 } sensor_data;
 
 #endif

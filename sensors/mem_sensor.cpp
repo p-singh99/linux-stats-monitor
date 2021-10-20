@@ -23,16 +23,22 @@ void MemSensor::getReadings(sensor_readings& readings) {
         std::string property;
         std::string unit;
         int value;
-        auto count = 0;
         auto finished = false;
+        auto gotMemTotal = false;
+        auto gotMemAvailable = false;
 
-        while (count != MEM_DATA_LEN && file >> property >> value >> unit) {
+        while (!finished && file >> property >> value >> unit) {
             property = property.substr(0, property.size() - 1);
-            if (property == "MemTotal" || property == "MemAvailable") {
+            if (property == "MemTotal") {
                 readings.memorySensor.memTotal.property = property;
                 readings.memorySensor.memTotal.value = value;
+                gotMemTotal = true;
+            } else if (property == "MemAvailable") {
+                readings.memorySensor.memAvailable.property = property;
+                readings.memorySensor.memAvailable.value = value;
+                gotMemAvailable = true;
             }
-            count++;
+            finished = gotMemTotal && gotMemAvailable;
         }
 
         resetFile();

@@ -46,7 +46,6 @@ void CpuSensor::getReadings(sensor_readings& readings) {
     const float idleDelta = idleTime - prevIdleReading;
     const float totalDelta = totalTime - prevTotalReading;
     const float percentUsed = totalDelta - idleDelta;
-
     readings.cpuSensor.totalUsage.value = 100.0 * percentUsed / totalDelta;
 
     prevIdleReading = idleTime;
